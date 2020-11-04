@@ -45,7 +45,7 @@ public class BackupUploadService implements IBackupUploadService {
   public InputStream getBackupStream(String uniqueFileName) throws IBackupUploader.BackupException {
     log.debug("sopInstanceUID={}, start read from backup... ", uniqueFileName);
     InputStream inputStream = backupUploader.doReadBackup(uniqueFileName);
-    log.debug("sopInstanceUID={}, backup readed successfully. ");
+    log.debug("sopInstanceUID={}, backup readed successfully.", uniqueFileName);
     return inputStream;
   }
 
