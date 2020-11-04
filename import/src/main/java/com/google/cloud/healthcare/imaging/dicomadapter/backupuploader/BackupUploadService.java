@@ -35,6 +35,7 @@ public class BackupUploadService implements IBackupUploadService {
 
   @Override
   public BackupState createBackup(InputStream inputStream, String uniqueFileName) throws IBackupUploader.BackupException {
+    log.debug("sopInstanceUID={}, start write to backup... ", uniqueFileName);
     backupUploader.doWriteBackup(inputStream, uniqueFileName);
     log.debug("sopInstanceUID={}, backup saved.", uniqueFileName);
     return new BackupState(uniqueFileName, attemptsAmount);
@@ -42,7 +43,10 @@ public class BackupUploadService implements IBackupUploadService {
 
   @Override
   public InputStream getBackupStream(String uniqueFileName) throws IBackupUploader.BackupException {
-    return backupUploader.doReadBackup(uniqueFileName);
+    log.debug("sopInstanceUID={}, start read from backup... ", uniqueFileName);
+    InputStream inputStream = backupUploader.doReadBackup(uniqueFileName);
+    log.debug("sopInstanceUID={}, backup readed successfully. ");
+    return inputStream;
   }
 
   @Override
